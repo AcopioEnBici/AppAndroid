@@ -41,16 +41,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Twitter.initialize(this);
+        mAuth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         sessionManager = TwitterCore.getInstance().getSessionManager()
         currentSession = sessionManager?.getActiveSession()
-
-        if(currentSession == null) {
-            signout()
-        }
 
         mTextMessage = findViewById(R.id.message) as TextView
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
@@ -60,7 +57,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if (mAuth?.getCurrentUser() == null) {
+        if (mAuth?.getCurrentUser() == null
+                || currentSession == null) {
             signout()
         }
     }

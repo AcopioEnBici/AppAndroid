@@ -30,9 +30,6 @@ class LoginActivity : AppCompatActivity() {
         currentSession = sessionManager?.getActiveSession()
         loginButton    = findViewById(R.id.login_button) as TwitterLoginButton?
 
-        // Check if Current Session
-        currentSession?.getUserName()?.let { longToast(it) }
-
         // Twitter Login Logic
         loginButton?.setCallback(object : Callback<TwitterSession>() {
             // Login Exitoso
