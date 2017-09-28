@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 import com.twitter.sdk.android.core.SessionManager
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterCore
@@ -29,10 +29,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_signout -> {
-                currentSession?.id?.let {
-                    sessionManager?.clearSession(it)
-                }
-                exitToLogin()
+                signout()
                 return@OnNavigationItemSelectedListener true
             }
             else -> {
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         currentSession = sessionManager?.getActiveSession()
 
         if(currentSession == null) {
-            exitToLogin()
+            signout()
         }
 
         mTextMessage = findViewById(R.id.message) as TextView
@@ -59,8 +56,15 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    fun exitToLogin() {
+    fun signout() {
+        FirebaseAuth.getInstance().signOut();
+
+        currentSession?.id?.let {
+            sessionManager?.clearSession(it)
+        }
+
         val i = Intent(applicationContext, LoginActivity::class.java)
         startActivity(i);
+        finish()
     }
 }

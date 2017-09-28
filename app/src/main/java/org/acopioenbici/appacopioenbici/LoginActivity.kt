@@ -1,26 +1,13 @@
 package org.acopioenbici.appacopioenbici
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
-import android.util.Log
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.TwitterAuthProvider
 import com.twitter.sdk.android.core.*
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
-import com.google.firebase.auth.FirebaseUser
-import android.widget.Toast
-import com.google.firebase.auth.AuthResult
-import com.google.android.gms.tasks.Task
-import android.support.annotation.NonNull
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.TwitterAuthProvider
-import com.google.firebase.auth.AuthCredential
-import com.twitter.sdk.android.core.TwitterSession
-
-
-
 
 
 /**
@@ -93,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
     fun launchMain() {
         val i = Intent(applicationContext, MainActivity::class.java)
         startActivity(i);
+        finish()
     }
 }
 
