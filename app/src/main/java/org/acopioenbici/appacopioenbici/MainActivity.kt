@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     var currentSession : TwitterSession?                 = null
     var sessionManager : SessionManager<TwitterSession>? = null
+    var mAuth          : FirebaseAuth?                   = null
 
     private var mTextMessage: TextView? = null
 
@@ -54,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         mTextMessage = findViewById(R.id.message) as TextView
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (mAuth?.getCurrentUser() == null) {
+            signout()
+        }
     }
 
     fun signout() {
