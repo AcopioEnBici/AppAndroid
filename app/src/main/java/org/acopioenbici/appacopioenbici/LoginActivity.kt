@@ -13,8 +13,9 @@ import org.jetbrains.anko.toast
  * A login screen that offers login via Twitter.
  */
 class LoginActivity : AppCompatActivity() {
-    var currentSession = null as TwitterSession?
-    var loginButton    = null as TwitterLoginButton?
+    var sessionManager : SessionManager<TwitterSession>? = null
+    var currentSession : TwitterSession?     = null
+    var loginButton    : TwitterLoginButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Twitter.initialize(this);
@@ -22,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        currentSession = TwitterCore.getInstance().getSessionManager().getActiveSession() as TwitterSession?
+        sessionManager = TwitterCore.getInstance().getSessionManager()
+        currentSession = sessionManager?.getActiveSession()
         loginButton    = findViewById(R.id.login_button) as TwitterLoginButton?
 
         // Check if Current Session
@@ -32,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton?.setCallback(object : Callback<TwitterSession>() {
             // Login Exitoso
             override fun success(result: Result<TwitterSession>) {
-                longToast(result.toString())
                 if (true) {
                     launchMain()
                 } else {
