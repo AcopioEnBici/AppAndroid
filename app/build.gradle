@@ -27,16 +27,19 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    // Android
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-vector-drawable:25.3.1'
+
     // Kotlin and Anko
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile "org.jetbrains.anko:anko:$anko_version"
 
-    // Twitter-Firebase Login
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    // Twitter-Firebase
     compile 'com.twitter.sdk.android:twitter-core:3.1.1'
-    compile 'com.android.support:support-vector-drawable:25.3.1'
     compile 'com.google.firebase:firebase-auth:11.4.0'
+    compile 'com.google.firebase:firebase-database:11.4.0'
 
     testCompile 'junit:junit:4.12'
 }
